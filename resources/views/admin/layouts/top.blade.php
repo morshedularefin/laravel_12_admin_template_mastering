@@ -7,15 +7,24 @@
     </form>
     <ul class="navbar-nav navbar-right justify-content-end rightsidetop">
         <li class="nav-link">
-            <a href="" target="_blank" class="btn btn-warning">Front End</a>
+            <a href="{{ url('/') }}" target="_blank" class="btn btn-warning">Front End</a>
         </li>
         <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                <img alt="image" src="uploads/user.jpg" class="rounded-circle-custom">
+                @if(Auth::guard()->user()->avatar != '')
+                <img alt="image" src="{{ asset('uploads/'.Auth::guard()->user()->avatar) }}" class="rounded-circle-custom">
+                @else
+                <img alt="image" src="{{ asset('uploads/default.png') }}" class="rounded-circle-custom">
+                @endif
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item" href="profile.html"><i class="far fa-user"></i> Edit Profile</a></li>
-                <li><a class="dropdown-item" href="login.html"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                <li>
+                    <form method="POST" action="{{ route('admin.logout') }}">
+                    @csrf
+                    <a class="dropdown-item" href="{{ route('admin.logout') }}" onclick="event.preventDefault(); this.closest('form').submit();"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                    </form>
+                </li>
             </ul>
         </li>
     </ul>
