@@ -5,6 +5,10 @@ use App\Http\Controllers\Admin\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Admin\Auth\NewPasswordController;
 use App\Http\Controllers\Admin\Auth\PasswordController;
 use App\Http\Controllers\Admin\Auth\PasswordResetLinkController;
+
+use App\Http\Controllers\Admin\AdminDashboardController;
+use App\Http\Controllers\Admin\AdminProfileController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest:admin')
@@ -42,4 +46,13 @@ Route::middleware('auth:admin')
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
         ->name('logout');
+});
+
+Route::middleware(['auth:admin', 'verified'])
+->prefix('admin')
+->as('admin.')
+->group(function () {
+    Route::get('dashboard', [AdminDashboardController::class, 'index'])->name('dashboard');
+    Route::get('profile', [AdminProfileController::class, 'index'])->name('profile');
+    Route::post('profile', [AdminProfileController::class, 'edit'])->name('profile.edit');
 });
