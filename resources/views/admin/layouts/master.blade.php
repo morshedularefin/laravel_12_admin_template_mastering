@@ -23,6 +23,7 @@
 </div>
 
 @include('admin.layouts.scripts_bottom')
+@include('admin.layouts.custom_error')
 
 </body>
 </html>

@@ -3,7 +3,6 @@
 @section('main_content')
 
 @include('admin.layouts.top')
-
 @include('admin.layouts.sidebar')
 
 <div class="main-content">
@@ -16,9 +15,6 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
-                            @if(session('success'))
-                            <div class="alert alert-success">{{ session('success') }}</div>
-                            @endif
                             <form action="{{ route('admin.profile.edit') }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
