@@ -16,6 +16,9 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-body">
+                            @if(session('success'))
+                            <div class="alert alert-success">{{ session('success') }}</div>
+                            @endif
                             <form action="{{ route('admin.profile.edit') }}" method="post" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
@@ -26,7 +29,7 @@
                                         <img src="{{ asset('uploads/default.png') }}" alt="" class="profile-photo w_100_p">
                                         @endif
                                         <br>
-                                        <input type="file" class="mt_10" name="photo">
+                                        <input type="file" class="mt_10" name="avatar">
                                     </div>
                                     <div class="col-md-9">
                                         <div class="mb-4">
@@ -39,11 +42,11 @@
                                         </div>
                                         <div class="mb-4">
                                             <label class="form-label">Password</label>
-                                            <input type="password" class="form-control" name="new_password">
+                                            <input type="password" class="form-control" name="password">
                                         </div>
                                         <div class="mb-4">
-                                            <label class="form-label">Retype Password</label>
-                                            <input type="password" class="form-control" name="password_confirmation">
+                                            <label class="form-label">Confirm Password</label>
+                                            <input type="password" class="form-control" name="confirm_password">
                                         </div>
                                         <div class="mb-4">
                                             <label class="form-label"></label>
